@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.sax.TextElementListener;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
                 porcent = i;
                 textPorcent.setText(Math.round(porcent) + "%");
+                calcular();
             }
 
             @Override
@@ -49,5 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void calcular(){
+
+        String valorRec = textEditValor.getText().toString();
+        if (valorRec == null || valorRec.equals("")){
+            Toast.makeText(getApplicationContext(), "Digite um valor!", Toast.LENGTH_LONG).show();
+
+        }else{
+            double valorDig = Double.parseDouble(valorRec);
+            double gorjeta = valorDig * (porcent/100);
+            textGorjeta.setText("R$ " + Math.round(gorjeta));
+        }
+
+
     }
 }
