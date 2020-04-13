@@ -2,8 +2,12 @@ package com.ramaria.androidexamplecalculogorjeta;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.sax.TextElementListener;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,19 +55,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
     public void calcular(){
 
         String valorRec = textEditValor.getText().toString();
         if (valorRec == null || valorRec.equals("")){
-            Toast.makeText(getApplicationContext(), "Digite um valor!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Digite um valor!", Toast.LENGTH_SHORT).show();
 
         }else{
             double valorDig = Double.parseDouble(valorRec);
             double gorjeta = valorDig * (porcent/100);
-            textGorjeta.setText("R$ " + Math.round(gorjeta));
+            double total = gorjeta +valorDig;
+            textGorjeta.setText("R$ " + gorjeta);
+            textTotal.setText("R$ " + total);
         }
-
 
     }
 }
